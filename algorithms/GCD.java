@@ -1,4 +1,4 @@
-package datastructres;
+package algorithms;
 
 /**
  * @author Abhinav Srivastava
