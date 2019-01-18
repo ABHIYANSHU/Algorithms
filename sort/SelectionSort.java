@@ -1,4 +1,4 @@
-package datastructres;
+package sort;
 
 /**
  * @author Abhinav Srivastava
