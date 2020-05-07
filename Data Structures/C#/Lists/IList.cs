@@ -1,6 +1,8 @@
+using System.Collections;
+
 namespace Lists
 {
-    public interface IList<E>
+    public interface IList<E> : IEnumerable
     {
         int Length();
         void Add(E item);

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Lists
 {
-    public class LinkedList<E> : IList<E>, IEnumerable
+    public class LinkedList<E> : IList<E>
     {
         private int length;
         private Node<E> Head;
@@ -17,12 +17,16 @@ namespace Lists
         }
 
         public int Length(){
+            int len = 0;
+
             Node<E> current = Head;
             while (current != null)
             {
                 current = current.next;
-                length++;
+                len++;
             }
+
+            length = len;
             return length;
         }
 
@@ -95,15 +99,17 @@ namespace Lists
 
         public bool Exists(E item)
         {
-            if(this.array == null)
+            Node<E> current = Head;
+
+            while (current != null)
             {
-                ToArray();
-            }
-            foreach(E val in this.array)
-            {
-                if (item.Equals(val))
+                if (current.data.Equals(item))
+                {
                     return true;
+                }
+                current = current.next;
             }
+
             return false;
         }
 
@@ -118,28 +124,43 @@ namespace Lists
         public int IndexOf(E item)
         {
             int i = 0;
-            if(this.array == null)
+            Node<E> current = Head;
+
+            while(current != null)
             {
-                ToArray();
-            }
-            foreach(E val in this.array)
-            {
-                if (val.Equals(item))
+                if (current.data.Equals(item))
                 {
                     return i;
                 }
                 i++;
+                current = current.next;
             }
+
             return -1;
         }
 
         public E ItemAt(int index)
         {
-            if(this.array == null)
+            int i = 0;
+            Node<E> current = Head;
+
+            if(index > length)
             {
-                ToArray();
+                throw new IndexOutOfRangeException("Index out of bounds");
             }
-            return array[index];
+
+            while(current != null && i < index)
+            {
+                current = current.next;
+                i++;
+            }
+
+            if(current == null)
+            {
+                throw new NullReferenceException("Item not Found");
+            }
+
+            return current.data;            
         }
     }
 }
