@@ -6,6 +6,8 @@ public class Program {
 
     public static void main(String[] args){
         ProcessLinkedList(1000);
+        list = null;
+        ProcessArrayList(1000);
     }
 
     public static void ProcessLinkedList(int n){
@@ -73,22 +75,7 @@ public class Program {
 
     public static void RemoveLinkedList(int n)
     {
-        int i = 0;
-
-        long watch = System.currentTimeMillis();
-
-        while (i < n)
-        {
-            list.Remove(i);
-            i += 2;
-        }
-
-        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        watch = System.currentTimeMillis() - watch;
-
-        System.out.println("Removing " + (n/2) + " items took : " + watch + " milli - seconds.");
-        System.out.println("Memory Used : " + memory + " bytes.");
-        System.out.println("--------------------------------------------------------------------------");
+        RemoveArrayList(n, true);
     }
 
     public static void RemoveLinkedList(int n, boolean even)
@@ -206,4 +193,186 @@ public class Program {
         System.out.println("--------------------------------------------------------------------------");
     }
 
+    public static void ProcessArrayList(int n)
+    {
+        System.out.println("Array List Started...............");
+        System.out.println("--------------------------------------------------------------------------");
+
+        InitializeArrayList();
+        AddArrayList(n);
+        int len1 = LengthArrayList();
+        RemoveArrayList(n);
+        int len2 = LengthArrayList();
+        int item = ItemAtArrayList(len2);
+        boolean exists = ExistsArrayList(item);
+        int index = IndexOfArrayList(item);
+        Integer[] array = ToArrayArrayList();
+        IterateArrayList();
+        RemoveAllArrayList();
+
+        System.out.println("Array List Ended.................");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void InitializeArrayList()
+    {
+        long watch = System.currentTimeMillis();
+
+        list = new ArrayList<Integer>();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+        System.out.println("Initializing took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void AddArrayList(int n)
+    {
+        long watch = System.currentTimeMillis();
+
+        for (int i = 0; i < n; i++)
+            list.Add(i);
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+        System.out.println("Adding " + n + " items took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static int LengthArrayList()
+    {
+        long watch = System.currentTimeMillis();
+
+        int n = list.Length();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Finding Length of " + n + " items took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return n;
+    }
+
+    public static void RemoveArrayList(int n){
+        RemoveArrayList(n, true);
+    }
+
+    public static void RemoveArrayList(int n, boolean even)
+    {
+        int i = even ? 0 : 1;
+
+        long watch = System.currentTimeMillis();
+
+        while (i < n)
+        {
+            list.Remove(i);
+            i += 2;
+        }
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Removing " + (n / 2) + " items took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static int ItemAtArrayList(int n)
+    {
+        long watch = System.currentTimeMillis();
+
+        int item = list.ItemAt(n / 2);
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Finding Item at Index " + (n / 2) + " took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return item;
+    }
+
+    public static boolean ExistsArrayList(int item)
+    {
+        long watch = System.currentTimeMillis();
+
+        boolean exists = list.Exists(item);
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Finding Item " + item + " took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return exists;
+    }
+
+    public static int IndexOfArrayList(int item)
+    {
+        long watch = System.currentTimeMillis();
+
+        int index = list.IndexOf(item);
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Finding Item " + item + " at Index " + index + " took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return index;
+    }
+
+    public static Integer[] ToArrayArrayList()
+    {
+        long watch = System.currentTimeMillis();
+
+        Integer[] array = list.ToArray();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Converting to Array took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return array;
+    }
+
+    public static void IterateArrayList()
+    {
+        long watch = System.currentTimeMillis();
+
+        for(Integer val : list)
+        {
+            // No task performed
+        }
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Traversing Array List took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    static void RemoveAllArrayList()
+    {
+        long watch = System.currentTimeMillis();
+
+        list.RemoveAll();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Removing all items from Linked List took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
 }
