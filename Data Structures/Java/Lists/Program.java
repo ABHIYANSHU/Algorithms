@@ -10,6 +10,7 @@ public class Program {
         ProcessArrayList(1000);
     }
 
+    @SuppressWarnings("unused")
     public static void ProcessLinkedList(int n){
         System.out.println("Linked List Started...............");
         System.out.println("--------------------------------------------------------------------------");
@@ -162,6 +163,7 @@ public class Program {
         return array;
     }
 
+    @SuppressWarnings("unused")
     public static void IterateLinkedList()
     {
         long watch = System.currentTimeMillis();
@@ -193,6 +195,7 @@ public class Program {
         System.out.println("--------------------------------------------------------------------------");
     }
 
+    @SuppressWarnings("unused")
     public static void ProcessArrayList(int n)
     {
         System.out.println("Array List Started...............");
@@ -345,6 +348,7 @@ public class Program {
         return array;
     }
 
+    @SuppressWarnings("unused")
     public static void IterateArrayList()
     {
         long watch = System.currentTimeMillis();

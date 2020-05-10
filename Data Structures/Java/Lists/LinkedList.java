@@ -70,6 +70,7 @@ public class LinkedList<E> implements IList<E> {
         length = 0;
     }
 
+    @SuppressWarnings("unchecked")
     public E[] ToArray() {
         E[] arrays = (E[])Array.newInstance(ItemAt(0).getClass(), length); 
         int i = 0;
