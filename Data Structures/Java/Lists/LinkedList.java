@@ -101,7 +101,10 @@ public class LinkedList<E> implements IList<E> {
     }
 
     public Iterator<E> iterator(){
-        return Arrays.stream(array).iterator();
+        if(array!=null){
+            return Arrays.stream(array).iterator();
+        }
+        return Arrays.stream(ToArray()).iterator();
     }
 
     public int IndexOf(E item){
