@@ -8,17 +8,20 @@ public class ArrayList<E> implements IList<E> {
     private E[] array;
     private int length;
 
+    @SuppressWarnings("unchecked")
     public ArrayList()
     {
         array = (E[])Array.newInstance(GetE(1).getClass(), 16);
         length = 0;
     }
 
+    @SuppressWarnings("unchecked")
     private E GetE(Object o){
         E item = (E)o;
         return item;
     }
 
+    @SuppressWarnings("unchecked")
     public void Add(E item)
     {
         if(length < array.length) {
@@ -50,6 +53,7 @@ public class ArrayList<E> implements IList<E> {
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     public Iterator<E> iterator()
     {
         E[] enumArray = (E[])Array.newInstance(GetE(1).getClass(), array.length);
@@ -109,11 +113,13 @@ public class ArrayList<E> implements IList<E> {
         }            
     }
 
+    @SuppressWarnings("unchecked")
     public void RemoveAll()
     {
         array = (E[])Array.newInstance(GetE(1).getClass(), 16);
     }
 
+    @SuppressWarnings("unchecked")
     public E[] ToArray()
     {
         E[] enumArray = (E[])Array.newInstance(GetE(1).getClass(), Length());

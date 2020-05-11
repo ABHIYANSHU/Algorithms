@@ -8,9 +8,13 @@ public class Program {
         ProcessLinkedList(1000);
         list = null;
         ProcessArrayList(1000);
+        list = null;
+        ProcessDoublyLinkedList(1000);
     }
 
-    public static void ProcessLinkedList(int n){
+    @SuppressWarnings("unused")
+    public static void ProcessLinkedList(int n)
+    {
         System.out.println("Linked List Started...............");
         System.out.println("--------------------------------------------------------------------------");
 
@@ -162,6 +166,7 @@ public class Program {
         return array;
     }
 
+    @SuppressWarnings("unused")
     public static void IterateLinkedList()
     {
         long watch = System.currentTimeMillis();
@@ -193,6 +198,7 @@ public class Program {
         System.out.println("--------------------------------------------------------------------------");
     }
 
+    @SuppressWarnings("unused")
     public static void ProcessArrayList(int n)
     {
         System.out.println("Array List Started...............");
@@ -345,6 +351,7 @@ public class Program {
         return array;
     }
 
+    @SuppressWarnings("unused")
     public static void IterateArrayList()
     {
         long watch = System.currentTimeMillis();
@@ -371,7 +378,192 @@ public class Program {
         long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         watch = System.currentTimeMillis() - watch;
 
-        System.out.println("Removing all items from Linked List took : " + watch + " milli - seconds.");
+        System.out.println("Removing all items from Array List took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    @SuppressWarnings("unused")
+    public static void ProcessDoublyLinkedList(int n)
+    {
+        System.out.println("Doubly Linked List Started...............");
+        System.out.println("--------------------------------------------------------------------------");
+
+        InitializeDoublyLinkedList();
+        AddDoublyLinkedList(n);
+        int len1 = LengthDoublyLinkedList();
+        RemoveDoublyLinkedList(n);
+        int len2 = LengthDoublyLinkedList();
+        int item = ItemAtDoublyLinkedList(len2);
+        boolean exists = ExistsDoublyLinkedList(item);
+        int index = IndexOfDoublyLinkedList(item);
+        Integer[] array = ToArrayDoublyLinkedList();
+        IterateDoublyLinkedList();
+        RemoveAllDoublyLinkedList();
+
+        System.out.println("Doubly Linked List Ended.................");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void InitializeDoublyLinkedList()
+    {
+        long watch = System.currentTimeMillis();
+
+        list = new DoublyLinkedList<Integer>();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+        System.out.println("Initializing took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void AddDoublyLinkedList(int n)
+    {
+        long watch = System.currentTimeMillis();
+
+        for (int i = 0; i < n; i++)
+            list.Add(i);
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+        System.out.println("Adding " + n + " items took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static int LengthDoublyLinkedList()
+    {
+        long watch = System.currentTimeMillis();
+
+        int n = list.Length();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Finding Length of " + n + " items took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return n;
+    }
+
+    public static void RemoveDoublyLinkedList(int n){
+        RemoveDoublyLinkedList(n, true);
+    }
+
+    public static void RemoveDoublyLinkedList(int n, boolean even)
+    {
+        int i = even ? 0 : 1;
+
+        long watch = System.currentTimeMillis();
+
+        while (i < n)
+        {
+            list.Remove(i);
+            i += 2;
+        }
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Removing " + (n / 2) + " items took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static int ItemAtDoublyLinkedList(int n)
+    {
+        long watch = System.currentTimeMillis();
+
+        int item = list.ItemAt(n / 2);
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Finding Item at Index " + (n / 2) + " took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return item;
+    }
+
+    public static boolean ExistsDoublyLinkedList(int item)
+    {
+        long watch = System.currentTimeMillis();
+
+        boolean exists = list.Exists(item);
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Finding Item " + item + " took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return exists;
+    }
+
+    public static int IndexOfDoublyLinkedList(int item)
+    {
+        long watch = System.currentTimeMillis();
+
+        int index = list.IndexOf(item);
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Finding Item " + item + " at Index " + index + " took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return index;
+    }
+
+    public static Integer[] ToArrayDoublyLinkedList()
+    {
+        long watch = System.currentTimeMillis();
+
+        Integer[] array = list.ToArray();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Converting to Array took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+
+        return array;
+    }
+
+    @SuppressWarnings("unused")
+    public static void IterateDoublyLinkedList()
+    {
+        long watch = System.currentTimeMillis();
+
+        for(Integer val : list)
+        {
+            // No task performed
+        }
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Traversing Doubly Linked List took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void RemoveAllDoublyLinkedList()
+    {
+        long watch = System.currentTimeMillis();
+
+        list.RemoveAll();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+
+        System.out.println("Removing all items from Doubly Linked List took : " + watch + " milli - seconds.");
         System.out.println("Memory Used : " + memory + " bytes.");
         System.out.println("--------------------------------------------------------------------------");
     }

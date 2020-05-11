@@ -70,6 +70,7 @@ public class LinkedList<E> implements IList<E> {
         length = 0;
     }
 
+    @SuppressWarnings("unchecked")
     public E[] ToArray() {
         E[] arrays = (E[])Array.newInstance(ItemAt(0).getClass(), length); 
         int i = 0;
@@ -100,7 +101,10 @@ public class LinkedList<E> implements IList<E> {
     }
 
     public Iterator<E> iterator(){
-        return Arrays.stream(array).iterator();
+        if(array!=null){
+            return Arrays.stream(array).iterator();
+        }
+        return Arrays.stream(ToArray()).iterator();
     }
 
     public int IndexOf(E item){
