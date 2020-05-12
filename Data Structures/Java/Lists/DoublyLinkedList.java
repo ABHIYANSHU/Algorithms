@@ -142,30 +142,6 @@ public class DoublyLinkedList<E> implements IList<E> {
         return null;
     }
 
-    public String toStraight(){
-        String sen = "";
-
-        DoubleNode<E> start = Head;
-        while(start!=null){
-            sen = sen + start.getData();
-            start = start.next;
-        }
-
-        return sen;
-    }
-
-    public String toReverse(){
-        String sen = "";
-
-        DoubleNode<E> start = Tail;
-        while(start!=null){
-            sen = sen + start.getData();
-            start = start.previous;
-        }
-
-        return sen;
-    }
-
     public boolean Exists(E item){
         DoubleNode<E> start = Head;
 
