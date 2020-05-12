@@ -5,11 +5,34 @@ public class Program {
     public static IList<Integer> list;
 
     public static void main(String[] args){
-        ProcessLinkedList(1000);
-        list = null;
-        ProcessArrayList(1000);
-        list = null;
-        ProcessDoublyLinkedList(1000);
+        //ProcessLinkedList(1000);
+        //list = null;
+        //ProcessArrayList(1000);
+        //list = null;
+        //ProcessDoublyLinkedList(1000);
+        //list = null;
+
+        CircularLinkedList<Integer> cll = new CircularLinkedList<Integer>();
+
+        cll.Add(1);
+        cll.Add(2);
+        cll.Add(3);
+        cll.Add(4);
+        cll.Add(5);
+        cll.Add(6);
+        cll.Add(7);
+        cll.Add(8);
+        cll.Remove(1);
+        cll.Remove(4);
+        cll.Remove(8);
+
+        System.out.println(cll.Length());
+        System.out.println(cll.IndexOf(5));
+        System.out.println(cll.ItemAt(4));
+
+        for(Integer i : cll){
+            System.out.print(i);
+        }
     }
 
     @SuppressWarnings("unused")
