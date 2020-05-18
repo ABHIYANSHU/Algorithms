@@ -5,26 +5,60 @@ public class Program {
     public static IList<Integer> list;
 
     public static void main(String[] args){
-        ProcessLinkedList(1000);
+        LinkedList(1000);
+        list = null;
+        ArrayList(1000);
+        list = null;
+        DoublyLinkedList(1000);
+        list = null;
+        CircularLinkedList(1000);
     }
 
-    public static void ProcessLinkedList(int n){
+    public static void LinkedList(int n)
+    {
         System.out.println("Linked List Started...............");
         System.out.println("--------------------------------------------------------------------------");
 
         InitializeLinkedList();
-        AddLinkedList(n);
-        int len1 = LengthLinkedList();
-        RemoveLinkedList(n);
-        int len2 = LengthLinkedList();
-        int item = ItemAtLinkedList(len2);
-        boolean exists = ExistsLinkedList(item);
-        int index = IndexOfLinkedList(item);
-        Integer[] array = ToArrayLinkedList();
-        IterateLinkedList();
-        RemoveAllLinkedList();
+        ProcessList(n);
 
         System.out.println("Linked List Ended.................");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void ArrayList(int n)
+    {
+        System.out.println("Array List Started...............");
+        System.out.println("--------------------------------------------------------------------------");
+
+        InitializeArrayList();
+        ProcessList(n);
+
+        System.out.println("Array List Ended.................");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void DoublyLinkedList(int n)
+    {
+        System.out.println("Doubly Linked List Started...............");
+        System.out.println("--------------------------------------------------------------------------");
+
+        InitializeDoublyLinkedList();
+        ProcessList(n);
+
+        System.out.println("Doubly Linked List Ended.................");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void CircularLinkedList(int n)
+    {
+        System.out.println("Circular Linked List Started...............");
+        System.out.println("--------------------------------------------------------------------------");
+
+        InitializeCircularLinkedList();
+        ProcessList(n);
+
+        System.out.println("Circular Linked List Ended.................");
         System.out.println("--------------------------------------------------------------------------");
     }
 
@@ -41,7 +75,61 @@ public class Program {
         System.out.println("--------------------------------------------------------------------------");
     }
 
-    public static void AddLinkedList(int n)
+    public static void InitializeArrayList()
+    {
+        long watch = System.currentTimeMillis();
+
+        list = new ArrayList<Integer>();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+        System.out.println("Initializing took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void InitializeDoublyLinkedList()
+    {
+        long watch = System.currentTimeMillis();
+
+        list = new DoublyLinkedList<Integer>();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+        System.out.println("Initializing took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    public static void InitializeCircularLinkedList()
+    {
+        long watch = System.currentTimeMillis();
+
+        list = new CircularLinkedList<Integer>();
+
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        watch = System.currentTimeMillis() - watch;
+        System.out.println("Initializing took : " + watch + " milli - seconds.");
+        System.out.println("Memory Used : " + memory + " bytes.");
+        System.out.println("--------------------------------------------------------------------------");
+    }
+
+    @SuppressWarnings("unused")
+    public static void ProcessList(int n)
+    {
+        AddList(n);
+        int len1 = LengthList();
+        RemoveList(n);
+        int len2 = LengthList();
+        int item = ItemAtList(len2);
+        boolean exists = ExistsList(item);
+        int index = IndexOfList(item);
+        Integer[] array = ToArrayList();
+        IterateList();
+        RemoveAllList();
+    }
+
+    public static void AddList(int n)
     {
         long watch = System.currentTimeMillis();
 
@@ -55,7 +143,7 @@ public class Program {
         System.out.println("--------------------------------------------------------------------------");
     }
 
-    public static int LengthLinkedList()
+    public static int LengthList()
     {
         long watch = System.currentTimeMillis();
 
@@ -71,27 +159,12 @@ public class Program {
         return n;
     }
 
-    public static void RemoveLinkedList(int n)
+    public static void RemoveList(int n)
     {
-        int i = 0;
-
-        long watch = System.currentTimeMillis();
-
-        while (i < n)
-        {
-            list.Remove(i);
-            i += 2;
-        }
-
-        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        watch = System.currentTimeMillis() - watch;
-
-        System.out.println("Removing " + (n/2) + " items took : " + watch + " milli - seconds.");
-        System.out.println("Memory Used : " + memory + " bytes.");
-        System.out.println("--------------------------------------------------------------------------");
+        RemoveList(n, true);
     }
 
-    public static void RemoveLinkedList(int n, boolean even)
+    public static void RemoveList(int n, boolean even)
     {
         int i = even ? 0 : 1;
 
@@ -111,7 +184,7 @@ public class Program {
         System.out.println("--------------------------------------------------------------------------");
     }
 
-    public static int ItemAtLinkedList(int n)
+    public static int ItemAtList(int n)
     {
         long watch = System.currentTimeMillis();
 
@@ -127,7 +200,7 @@ public class Program {
         return item;
     }
 
-    public static int IndexOfLinkedList(int item)
+    public static int IndexOfList(int item)
     {
         long watch = System.currentTimeMillis();
 
@@ -143,7 +216,7 @@ public class Program {
         return index;
     }
 
-    public static boolean ExistsLinkedList(int item)
+    public static boolean ExistsList(int item)
     {
         long watch = System.currentTimeMillis();
 
@@ -159,7 +232,7 @@ public class Program {
         return exists;
     }
 
-    public static Integer[] ToArrayLinkedList()
+    public static Integer[] ToArrayList()
     {
         long watch = System.currentTimeMillis();
 
@@ -175,11 +248,12 @@ public class Program {
         return array;
     }
 
-    public static void IterateLinkedList()
+    @SuppressWarnings("unused")
+    public static void IterateList()
     {
         long watch = System.currentTimeMillis();
 
-        for(int val : list)
+        for(Integer val : list)
         {
             // No task performed
         }
@@ -187,12 +261,12 @@ public class Program {
         long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         watch = System.currentTimeMillis() - watch;
 
-        System.out.println("Traversing Linked List took : " + watch + " milli - seconds.");
+        System.out.println("Traversing List took : " + watch + " milli - seconds.");
         System.out.println("Memory Used : " + memory + " bytes.");
         System.out.println("--------------------------------------------------------------------------");
     }
 
-    public static void RemoveAllLinkedList()
+    public static void RemoveAllList()
     {
         long watch = System.currentTimeMillis();
 
@@ -201,9 +275,8 @@ public class Program {
         long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         watch = System.currentTimeMillis() - watch;
 
-        System.out.println("Removing all items from Linked List took : " + watch + " milli - seconds.");
+        System.out.println("Removing all items from List took : " + watch + " milli - seconds.");
         System.out.println("Memory Used : " + memory + " bytes.");
         System.out.println("--------------------------------------------------------------------------");
     }
-
 }
