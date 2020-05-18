@@ -5,13 +5,17 @@ public class Program {
     public static IList<Integer> list;
 
     public static void main(String[] args){
-        LinkedList(1000);
-        list = null;
-        ArrayList(1000);
-        list = null;
-        DoublyLinkedList(1000);
-        list = null;
-        CircularLinkedList(1000);
+        //LinkedList(1000);
+        //list = null;
+        //ArrayList(1000);
+        //list = null;
+        //DoublyLinkedList(1000);
+        //list = null;
+        //CircularLinkedList(1000);
+
+        DoublyCircularLinkedList<Integer> dcll = new DoublyCircularLinkedList<Integer>();
+        dcll.Add(1);
+        dcll.Add(2);
     }
 
     public static void LinkedList(int n)
