@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    </head>
+    <body style="width: 100%; height: auto;">
+        <div id="drawing"></div>
+    </body>
+    <script type="text/javascript">
+    
+        window.addEventListener("load", function(){ 
+            
+            var ns = 'http://www.w3.org/2000/svg'
+            var div = document.getElementById('drawing')
+            console.log(div)
+        
+            var svg = document.createElementNS(ns, 'svg')
+            svg.setAttributeNS(null, 'width', '100%')
+            svg.setAttributeNS(null, 'height', '100%')
+            div.appendChild(svg)
+    
+            var rect = document.createElementNS(ns, 'rect')
+            rect.setAttributeNS(null, 'width', 100)
+            rect.setAttributeNS(null, 'height', 100)
+            rect.setAttributeNS(null, 'fill', 'blue')
+            svg.appendChild(rect)
+    
+        });
+    
+    </script>
+</html>
