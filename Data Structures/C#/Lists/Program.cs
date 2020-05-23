@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Lists
 {
-    class Program
+    public class Program
     {
         public static IList<int> list;
 
@@ -12,11 +12,9 @@ namespace Lists
         {
             try
             {
-                ProcessLinkedList(1000);
-
+                LinkedList(1000);
                 list = null;
-
-                ProcessArrayList(1000);
+                ArrayList(1000);
             }
             catch (Exception ex)
             {
@@ -24,23 +22,14 @@ namespace Lists
             }
         }
 
-        #region Linked List
-        static void ProcessLinkedList(int n)
+        #region LinkedList
+        static void LinkedList(int n)
         {
             Console.WriteLine("Linked List Started...............");
             Console.WriteLine("--------------------------------------------------------------------------");
 
             InitializeLinkedList();
-            AddLinkedList(n);
-            int len1 = LengthLinkedList();
-            RemoveLinkedList(n);
-            int len2 = LengthLinkedList();
-            int item = ItemAtLinkedList(len2);
-            bool exists = ExistsLinkedList(item);
-            int index = IndexOfLinkedList(item);
-            int[] array = ToArrayLinkedList();
-            IterateLinkedList();
-            RemoveAllLinkedList();
+            ProcessList(n);
 
             Console.WriteLine("Linked List Ended.................");
             Console.WriteLine("--------------------------------------------------------------------------");
@@ -59,8 +48,52 @@ namespace Lists
             Console.WriteLine("Memory Used : " + memory + " bytes.");
             Console.WriteLine("--------------------------------------------------------------------------");
         }
+        #endregion
 
-        static void AddLinkedList(int n)
+        #region ArrayList
+        static void ArrayList(int n)
+        {
+            Console.WriteLine("Array List Started...............");
+            Console.WriteLine("--------------------------------------------------------------------------");
+
+            InitializeArrayList();
+            ProcessList(n);
+
+            Console.WriteLine("Array List Ended.................");
+            Console.WriteLine("--------------------------------------------------------------------------");
+        }
+
+        static void InitializeArrayList()
+        {
+            Stopwatch watch = Stopwatch.StartNew();
+            long memory = GC.GetTotalMemory(true);
+
+            list = new ArrayList<int>();
+
+            memory = GC.GetTotalMemory(true) - memory;
+            watch.Stop();
+            Console.WriteLine("Initializing took : " + watch.ElapsedMilliseconds + " milli - seconds.");
+            Console.WriteLine("Memory Used : " + memory + " bytes.");
+            Console.WriteLine("--------------------------------------------------------------------------");
+        }
+        #endregion
+
+        #region List
+        static void ProcessList(int n)
+        {
+            AddList(n);
+            int len1 = LengthList();
+            RemoveList(n);
+            int len2 = LengthList();
+            int item = ItemAtList(len2);
+            bool exists = ExistsList(item);
+            int index = IndexOfList(item);
+            int[] array = ToArrayList();
+            IterateList();
+            RemoveAllList();        
+        }
+
+        static void AddList(int n)
         {
             Stopwatch watch = Stopwatch.StartNew();
             long memory = GC.GetTotalMemory(true);
@@ -70,12 +103,12 @@ namespace Lists
 
             memory = GC.GetTotalMemory(true) - memory;
             watch.Stop();
-            Console.WriteLine("Adding "+n+" items took : "+ watch.ElapsedMilliseconds + " milli - seconds.");
+            Console.WriteLine("Adding " + n + " items took : " + watch.ElapsedMilliseconds + " milli - seconds.");
             Console.WriteLine("Memory Used : " + memory + " bytes.");
             Console.WriteLine("--------------------------------------------------------------------------");
         }
 
-        static int LengthLinkedList()
+        static int LengthList()
         {
             Stopwatch watch = Stopwatch.StartNew();
             long memory = GC.GetTotalMemory(true);
@@ -92,7 +125,7 @@ namespace Lists
             return n;
         }
 
-        static void RemoveLinkedList(int n, bool even = true)
+        static void RemoveList(int n, bool even = true)
         {
             int i = even ? 0 : 1;
 
@@ -113,7 +146,7 @@ namespace Lists
             Console.WriteLine("--------------------------------------------------------------------------");
         }
 
-        static int ItemAtLinkedList(int n)
+        static int ItemAtList(int n)
         {
             Stopwatch watch = Stopwatch.StartNew();
             long memory = GC.GetTotalMemory(true);
@@ -130,215 +163,7 @@ namespace Lists
             return item;
         }
 
-        static int IndexOfLinkedList(int item)
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            int index = list.IndexOf(item);
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-
-            Console.WriteLine("Finding Item " + item + " at Index "+index+ " took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-
-            return index;
-        }
-
-        static bool ExistsLinkedList(int item)
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            bool exists = list.Exists(item);
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-
-            Console.WriteLine("Finding Item " +item+ " took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-
-            return exists;
-        }
-
-        static int[] ToArrayLinkedList()
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            int[] array = list.ToArray();
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-
-            Console.WriteLine("Converting to Array took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-
-            return array;
-        }
-
-        static void IterateLinkedList()
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            foreach(int val in list)
-            {
-                // No task performed
-            }
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-
-            Console.WriteLine("Traversing Linked List took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-        }
-
-        static void RemoveAllLinkedList()
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            list.RemoveAll();
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-
-            Console.WriteLine("Removing all items from Linked List took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-        }
-        #endregion
-
-        #region Array List
-        static void ProcessArrayList(int n)
-        {
-            Console.WriteLine("Array List Started...............");
-            Console.WriteLine("--------------------------------------------------------------------------");
-
-            InitializeArrayList();
-            AddArrayList(n);
-            int len1 = LengthArrayList();
-            RemoveArrayList(n);
-            int len2 = LengthArrayList();
-            int item = ItemAtArrayList(len2);
-            bool exists = ExistsArrayList(item);
-            int index = IndexOfArrayList(item);
-            int[] array = ToArrayArrayList();
-            IterateArrayList();
-            RemoveAllArrayList();
-
-            Console.WriteLine("Array List Ended.................");
-            Console.WriteLine("--------------------------------------------------------------------------");
-        }
-
-        static void InitializeArrayList()
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            list = new ArrayList<int>();
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-            Console.WriteLine("Initializing took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-        }
-
-        static void AddArrayList(int n)
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            for (int i = 0; i < n; i++)
-                list.Add(i);
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-            Console.WriteLine("Adding " + n + " items took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-        }
-
-        static int LengthArrayList()
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            int n = list.Length();
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-
-            Console.WriteLine("Finding Length of " + n + " items took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-
-            return n;
-        }
-
-        static void RemoveArrayList(int n, bool even = true)
-        {
-            int i = even ? 0 : 1;
-
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            while (i < n)
-            {
-                list.Remove(i);
-                i += 2;
-            }
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-
-            Console.WriteLine("Removing " + (n / 2) + " items took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-        }
-
-        static int ItemAtArrayList(int n)
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            int item = list.ItemAt(n / 2);
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-
-            Console.WriteLine("Finding Item at Index " + (n / 2) + " took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-
-            return item;
-        }
-
-        static bool ExistsArrayList(int item)
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-            long memory = GC.GetTotalMemory(true);
-
-            bool exists = list.Exists(item);
-
-            memory = GC.GetTotalMemory(true) - memory;
-            watch.Stop();
-
-            Console.WriteLine("Finding Item " + item + " took : " + watch.ElapsedMilliseconds + " milli - seconds.");
-            Console.WriteLine("Memory Used : " + memory + " bytes.");
-            Console.WriteLine("--------------------------------------------------------------------------");
-
-            return exists;
-        }
-
-        static int IndexOfArrayList(int item)
+        static int IndexOfList(int item)
         {
             Stopwatch watch = Stopwatch.StartNew();
             long memory = GC.GetTotalMemory(true);
@@ -355,7 +180,24 @@ namespace Lists
             return index;
         }
 
-        static int[] ToArrayArrayList()
+        static bool ExistsList(int item)
+        {
+            Stopwatch watch = Stopwatch.StartNew();
+            long memory = GC.GetTotalMemory(true);
+
+            bool exists = list.Exists(item);
+
+            memory = GC.GetTotalMemory(true) - memory;
+            watch.Stop();
+
+            Console.WriteLine("Finding Item " +item+ " took : " + watch.ElapsedMilliseconds + " milli - seconds.");
+            Console.WriteLine("Memory Used : " + memory + " bytes.");
+            Console.WriteLine("--------------------------------------------------------------------------");
+
+            return exists;
+        }
+
+        static int[] ToArrayList()
         {
             Stopwatch watch = Stopwatch.StartNew();
             long memory = GC.GetTotalMemory(true);
@@ -372,12 +214,12 @@ namespace Lists
             return array;
         }
 
-        static void IterateArrayList()
+        static void IterateList()
         {
             Stopwatch watch = Stopwatch.StartNew();
             long memory = GC.GetTotalMemory(true);
 
-            foreach (int val in list)
+            foreach(int val in list)
             {
                 // No task performed
             }
@@ -385,12 +227,12 @@ namespace Lists
             memory = GC.GetTotalMemory(true) - memory;
             watch.Stop();
 
-            Console.WriteLine("Traversing Array List took : " + watch.ElapsedMilliseconds + " milli - seconds.");
+            Console.WriteLine("Traversing List took : " + watch.ElapsedMilliseconds + " milli - seconds.");
             Console.WriteLine("Memory Used : " + memory + " bytes.");
             Console.WriteLine("--------------------------------------------------------------------------");
         }
 
-        static void RemoveAllArrayList()
+        static void RemoveAllList()
         {
             Stopwatch watch = Stopwatch.StartNew();
             long memory = GC.GetTotalMemory(true);
@@ -405,5 +247,6 @@ namespace Lists
             Console.WriteLine("--------------------------------------------------------------------------");
         }
         #endregion
+
     }
 }
