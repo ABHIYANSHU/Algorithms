@@ -9,6 +9,7 @@ namespace Lists
     {
         private int length;
         private Node<E> Head;
+        private Node<E> Tail;
         private E[] array;
 
         public LinkedList(){
@@ -17,66 +18,71 @@ namespace Lists
         }
 
         public int Length(){
-            int len = 0;
-
-            Node<E> current = Head;
-            while (current != null)
-            {
-                current = current.next;
-                len++;
-            }
-
-            length = len;
             return length;
         }
 
         public void Add(E item){
-            Node<E> current = new Node<E>(item);
-
-            if (Head == null)
+            try
             {
-                Head = current;
-                return;
-            }
+                Node<E> current = new Node<E>(item);
 
-            Node<E> lastNode = Head;
-            while (lastNode.next != null)
+                if (Head == null)
+                {
+                    Head = current;
+                    Tail = Head;
+                    length++;
+                    return;
+                }
+
+                Tail.next = current;
+                Tail = Tail.next;
+                length++;
+            }
+            catch(Exception ex)
             {
-                lastNode = lastNode.next;
+                Console.WriteLine(ex.Message);
             }
-
-            lastNode.next = current;
         }
 
         public void Remove(E item)
         {
-            Node<E> current = Head;
-            Node<E> prev = null;
-
-            if(current != null)
+            try
             {
-                if (current.data.Equals(item))
-                {
-                    Head = current.next;
-                    return;
-                }
+                Node<E> current = Head;
+                Node<E> prev = null;
 
-                while(current!=null)
+                if (current != null)
                 {
-                    prev = current;
-                    current = current.next;
                     if (current.data.Equals(item))
                     {
-                        prev.next = current.next;
+                        Head = current.next;
+                        length--;
                         return;
                     }
+
+                    while (current != null)
+                    {
+                        prev = current;
+                        current = current.next;
+                        if (current.data.Equals(item))
+                        {
+                            prev.next = current.next;
+                            length--;
+                            return;
+                        }
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
         public void RemoveAll()
         {
             Head = null;
+            Tail = null;
             length = 0;
         }
         
@@ -144,7 +150,7 @@ namespace Lists
             int i = 0;
             Node<E> current = Head;
 
-            if(index > length)
+            if(index >= length)
             {
                 throw new IndexOutOfRangeException("Index out of bounds");
             }
@@ -161,6 +167,20 @@ namespace Lists
             }
 
             return current.data;            
+        }
+
+        public IList<E> Reverse()
+        {
+            E[] straightList = ToArray();
+
+            LinkedList<E> list = new LinkedList<E>();
+
+            for(int i = straightList.Length-1; i > -1; i--)
+            {
+                list.Add(straightList[i]);
+            }
+
+            return list;
         }
     }
 }
