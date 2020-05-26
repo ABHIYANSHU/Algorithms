@@ -150,7 +150,7 @@ namespace Lists
             int i = 0;
             Node<E> current = Head;
 
-            if(index > length)
+            if(index >= length)
             {
                 throw new IndexOutOfRangeException("Index out of bounds");
             }
@@ -167,6 +167,20 @@ namespace Lists
             }
 
             return current.data;            
+        }
+
+        public IList<E> Reverse()
+        {
+            E[] straightList = ToArray();
+
+            LinkedList<E> list = new LinkedList<E>();
+
+            for(int i = straightList.Length-1; i > -1; i--)
+            {
+                list.Add(straightList[i]);
+            }
+
+            return list;
         }
     }
 }

@@ -16,6 +16,12 @@ namespace Lists
             length = 0;
         }
 
+        private ArrayList(int i)
+        {
+            array = new E[i];
+            length = 0;
+        }
+
         public void Add(E item)
         {
             if(length < array.Length)
@@ -113,6 +119,20 @@ namespace Lists
         public void RemoveAll()
         {
             array = new E[16];
+        }
+
+        public IList<E> Reverse()
+        {
+            E[] straightList = ToArray();
+
+            ArrayList<E> list = new ArrayList<E>(straightList.Length);
+
+            for(int i = straightList.Length-1; i > -1; i--)
+            {
+                list.Add(straightList[i]);
+            }
+
+            return list;
         }
 
         public E[] ToArray()

@@ -12,5 +12,6 @@ namespace Lists
         bool Exists(E item);
         int IndexOf(E item);
         E ItemAt(int index);
+        IList<E> Reverse();
     }
 }

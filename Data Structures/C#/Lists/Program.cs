@@ -15,6 +15,8 @@ namespace Lists
                 LinkedList(1000);
                 list = null;
                 ArrayList(1000);
+                list = null;
+                DoublyLinkedList(1000);
             }
             catch (Exception ex)
             {
@@ -78,6 +80,34 @@ namespace Lists
         }
         #endregion
 
+        #region DoublyLinkedList
+        static void DoublyLinkedList(int n)
+        {
+            Console.WriteLine("Doubly Linked List Started...............");
+            Console.WriteLine("--------------------------------------------------------------------------");
+
+            InitializeDoublyLinkedList();
+            ProcessList(n);
+
+            Console.WriteLine("Doubly Linked List Ended.................");
+            Console.WriteLine("--------------------------------------------------------------------------");
+        }
+
+        static void InitializeDoublyLinkedList()
+        {
+            Stopwatch watch = Stopwatch.StartNew();
+            long memory = GC.GetTotalMemory(true);
+
+            list = new DoublyLinkedList<int>();
+
+            memory = GC.GetTotalMemory(true) - memory;
+            watch.Stop();
+            Console.WriteLine("Initializing took : " + watch.ElapsedMilliseconds + " milli - seconds.");
+            Console.WriteLine("Memory Used : " + memory + " bytes.");
+            Console.WriteLine("--------------------------------------------------------------------------");
+        }
+        #endregion
+
         #region List
         static void ProcessList(int n)
         {
@@ -89,6 +119,8 @@ namespace Lists
             bool exists = ExistsList(item);
             int index = IndexOfList(item);
             int[] array = ToArrayList();
+            IterateList();
+            list = ReverseList();
             IterateList();
             RemoveAllList();        
         }
@@ -230,6 +262,23 @@ namespace Lists
             Console.WriteLine("Traversing List took : " + watch.ElapsedMilliseconds + " milli - seconds.");
             Console.WriteLine("Memory Used : " + memory + " bytes.");
             Console.WriteLine("--------------------------------------------------------------------------");
+        }
+
+        static IList<int> ReverseList()
+        {
+            Stopwatch watch = Stopwatch.StartNew();
+            long memory = GC.GetTotalMemory(true);
+
+            list = list.Reverse();
+
+            memory = GC.GetTotalMemory(true) - memory;
+            watch.Stop();
+
+            Console.WriteLine("Reversing List took : " + watch.ElapsedMilliseconds + " milli - seconds.");
+            Console.WriteLine("Memory Used : " + memory + " bytes.");
+            Console.WriteLine("--------------------------------------------------------------------------");
+
+            return list;
         }
 
         static void RemoveAllList()
