@@ -5,7 +5,7 @@ package Arrays;
  * Time Complexity: O(n)
  * Space Complexity: O(d)
  */
-public class ArrayRotation1<E>
+public class ArrayRotation1<E> implements ArrayRotation<E>
 {
     private E[] elements;
 
